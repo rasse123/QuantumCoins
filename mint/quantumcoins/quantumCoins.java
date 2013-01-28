@@ -27,7 +27,7 @@ public class quantumCoins
 {	
 	public static Item coin;
 	
-	@SidedProxy(clientSide = "mint.quantumCoins.ClientProxy", serverSide = "mint.quantumCoins.CommonProxy")
+	@SidedProxy(clientSide = "mint.quantumcoins.ClientProxy", serverSide = "mint.quantumcoins.CommonProxy")
 	public static CommonProxy proxy;
 	
 	@Instance("Coins")
