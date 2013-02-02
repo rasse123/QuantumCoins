@@ -9,13 +9,15 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 import cpw.mods.fml.common.FMLLog;
 
-public class configHelper
+public class ConfigHelper
 {
 	public static Configuration config;
 
 	public static int coinNum;
-	public static String coinName;
 	public static int coinID;
+	public static int convertAmount;
+	public static int convertTime;
+	public static String coinName;
 
 	public static String[] coinTypeName;
 	public static String[] coinNameColor;
@@ -83,7 +85,17 @@ public class configHelper
 			Property coinNameP = config.get(CATEGORY_ITEM, "coin_name", "Coin");
 			coinName = coinNameP.value;
 			coinNameP.comment = "Name for the coins";
+			
+			Property convertAmountP = config.get(CATEGORY_ITEM, "convert_amount", 5);
+			convertAmount = convertAmountP.getInt();
+			convertAmountP.comment = "Number of coins needed/gained from a conversion.";
+			
+			Property convertTimeP = config.get(CATEGORY_ITEM, "convert_time", 3);
+			convertTime = convertTimeP.getInt();
+			convertTimeP.comment = "Time in seconds the player needs to hold the conversion for it to work";
 
+			
+			
 			// Load each config field
 			coinTypeName = populateFromConfig("Coin_Types", "coin_type_",
 					new String[] { "Copper", "Iron", "Gold", "Obsidian",
@@ -110,7 +122,7 @@ public class configHelper
 		
 		catch (Exception exception)
 		{
-			FMLLog.log(Level.SEVERE, exception, "Coins has had a problem loading its configuration!");
+			FMLLog.log(Level.SEVERE, exception, "Quantum Coins has had a problem loading its configuration!");
 		} 
 		
 		finally

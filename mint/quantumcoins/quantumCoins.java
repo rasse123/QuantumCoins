@@ -3,8 +3,10 @@ package mint.quantumcoins;
 import java.util.logging.Level;
 
 import net.minecraft.item.Item;
+import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
+import net.minecraftforge.event.ForgeSubscribe;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -23,7 +25,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 @Mod(modid = "qcoins", name = "Quantum Coins", version = "1.0.0")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 
-public class quantumCoins
+public class QuantumCoins
 {	
 	public static Item coin;
 	
@@ -31,18 +33,20 @@ public class quantumCoins
 	public static CommonProxy proxy;
 	
 	@Instance("Coins")
-	public static quantumCoins instance;
+	public static QuantumCoins instance;
 	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		configHelper.init(event.getSuggestedConfigurationFile());
+		ConfigHelper.init(event.getSuggestedConfigurationFile());
+		
+		proxy.registerSoundHandler();
 	}
 
 	@Init
 	public void init(FMLInitializationEvent event)
 	{
-		coin = new itemCoin(configHelper.coinID);
+		coin = new itemCoin(ConfigHelper.coinID);
 		GameRegistry.registerItem(coin, "coin");
 		
 		proxy.registerRenderThings();
@@ -53,4 +57,5 @@ public class quantumCoins
 	{
 		FMLLog.info("Quantum Coins: Looks like everything ran correctly!");
 	}
+	
 }

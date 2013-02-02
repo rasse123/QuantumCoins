@@ -6,4 +6,6 @@ import net.minecraftforge.event.Event;
 public class CommonProxy
 {
 	public void registerRenderThings(){}
+
+	public void registerSoundHandler() {}
 }
